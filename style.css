@@ -1,5 +1,19 @@
 .card#line1 {
-  position: fixed;
-  top: 0;
-  right: 0;
+ 	position: fixed;
+	top: 0;
+ 	right: 0;
+    background: black;
+}
+
+.card#line1 h1 {
+    color: orange;
+    font-size: 30px;
+}
+
+.photo#photo1 {
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    heith: 200px;
 }
