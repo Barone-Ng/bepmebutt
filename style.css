@@ -1,19 +1,27 @@
-.card#line1 {
- 	position: fixed;
-	top: 0;
- 	right: 0;
-    background: black;
+body {
+    margin: 0;
 }
 
+/* Card bên trái */
+.card#line1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: black;
+    padding: 15px;
+}
+
+/* Chỉnh chữ */
 .card#line1 h1 {
     color: orange;
     font-size: 30px;
 }
 
+/* Photo bên phải */
 .photo#photo1 {
-	position: fixed;
+    position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     width: 300px;
-    heith: 200px;
+    height: 200px;
 }
