@@ -8,14 +8,14 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background: orange;
+    background: white;
     padding: 15px;
 }
 
 /* Chỉnh chữ */
 .card#line1 h1 {
     color: orange;
-    font-size: 30px;
+    font-size: 80px;
 }
 
 /* Photo bên phải */
