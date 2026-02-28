@@ -1,28 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 body {
     margin: 0;
-    background: #f7927e;
+    background: linear-gradient(135deg, #ffe8d6 0%, #ffdcc2 50%, #ffcc5c 100%);
+    font-family: 'Montserrat', sans-serif;
+    color: #4a3824; /* dark brown for a bakery feel */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-/* Card bên trái */
-.card#line1 {
+/* global link/reset */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* navigation bar */
+nav.catalog-bar {
     position: fixed;
     top: 0;
-    left: 0;
-    background: white;
-    padding: 15px;
+    width: 100%;
+    background: rgba(255, 250, 240, 0.95); /* cream */
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    z-index: 1000;
+    border-bottom: 2px solid #d1495b;
 }
 
-/* Chỉnh chữ */
-.card#line1 h1 {
-    color: orange;
-    font-size: 80px;
+nav.catalog-bar ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
-/* Photo bên phải */
-.photo#photo1 {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 500px;
-    height: 400px;
+nav.catalog-bar li {
+    margin: 0 15px;
+}
+
+nav.catalog-bar a {
+    font-weight: 600;
+    padding: 15px 0;
+    display: block;
+    transition: color .2s ease;
+}
+
+nav.catalog-bar a:hover {
+    color: #d1495b;
+    text-shadow: 0 0 2px rgba(209,73,91,.5);
+}
+
+/* hero banner */
+.hero img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    max-height: 400px;
+}
+
+/* card */
+.card {
+    max-width: 600px;
+    margin: 40px auto 20px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.12);
+    text-align: center;
+    border: 2px dashed #ffd9b3; /* icing-like border */
+    position: relative;
+}
+.card::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 20px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="20"><path d="M0,20 Q20,0 40,20 T80,20" fill="none" stroke="%23d1495b" stroke-width="4"/></svg>') no-repeat center;
+}
+
+.card h1 {
+    color: #d1495b;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.card p {
+    margin: 8px 0;
+    font-size: 1.1rem;
+}
+
+.gallery {
+    max-width: 900px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.gallery h2 {
+    color: #d1495b;
+    margin-bottom: 15px;
+}
+
+.gallery .thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.gallery .thumbs img {
+    border-radius: 10px;
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    box-shadow: 0 6px 15px rgba(0,0,0,.15);
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+.gallery .thumbs img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+}
+
+.menu {
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.menu h2 {
+    color: #d1495b;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.menu li {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+.contact {
+    max-width: 600px;
+    margin: 40px auto 60px;
+    text-align: center;
+}
+
+.contact h2 {
+    color: #d1495b;
+    margin-bottom: 10px;
+}
+
+/* responsive tweaks */
+@media (max-width: 600px) {
+    nav.catalog-bar ul { flex-direction: column; }
+    nav.catalog-bar li { margin: 5px 0; }
+    .card { margin-top: 160px; }
+    .gallery .thumbs { flex-direction: column; }
+    .gallery .thumbs img { width: 100%; height: auto; }
+    .hero img { max-height: 200px; }
 }
