@@ -56,7 +56,7 @@ nav.catalog-bar a:hover {
     width: 100%;
     display: block;
     object-fit: cover;
-    max-height: 400px;
+    max-height: 200px;
 }
 
 /* card */
@@ -79,7 +79,6 @@ nav.catalog-bar a:hover {
     transform: translateX(-50%);
     width: 80px;
     height: 20px;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="20"><path d="M0,20 Q20,0 40,20 T80,20" fill="none" stroke="%23d1495b" stroke-width="4"/></svg>') no-repeat center;
 }
 
 .card h1 {
