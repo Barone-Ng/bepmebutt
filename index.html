@@ -1,55 +1,340 @@
 <!DOCTYPE html>
-<html lang="vn">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bep Me Butt</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bếp Mẹ Butt – Bánh Ngọt Thủ Công</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <nav class="catalog-bar">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#cake">Cake</a></li>
-        <li><a href="#food">Food</a></li>
-        <li><a href="#lesson">Lesson</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero">
-      <img src="https://via.placeholder.com/1200x400?text=Fresh+Baked+Goods" alt="Bakery banner">
-    </section>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Bếp Mẹ Butt</a>
+  <ul class="nav-links">
+    <li><a href="#san-pham">Sản Phẩm</a></li>
+    <li><a href="#thu-vien">Thư Viện</a></li>
+    <li><a href="#cau-chuyen">Câu Chuyện</a></li>
+    <li><a href="#danh-gia">Đánh Giá</a></li>
+    <li><a href="#lien-he" class="nav-cta">Liên Hệ</a></li>
+  </ul>
+</nav>
 
-    <section class="card" id="about">
-      <h1><em>Bep Me Butt Bakery</em></h1>
-      <p></p>
-      <p>Come taste our tradition!</p>
-      <p>Phone: 0977819988</p>
-    </section>
+<!-- HERO -->
+<section class="hero" id="trang-chu">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Thuận An · Bình Minh · Vĩnh Long</p>
+    <h1 class="hero-title">
+      Từ bàn tay<br><em>mẹ</em> đến<br>trái tim bạn
+    </h1>
+    <p class="hero-desc">
+      Mỗi chiếc bánh là một câu chuyện yêu thương — được nhào nặn tỉ mỉ từ nguyên liệu tươi ngon, gửi gắm hương vị quê nhà đến bữa tiệc của bạn.
+    </p>
+    <div class="hero-btns">
+      <a href="#san-pham" class="btn-primary">Xem Sản Phẩm</a>
+      <a href="https://www.facebook.com/messages/t/100029958670315" target="_blank" class="btn-outline">Đặt Hàng Ngay</a>
+    </div>
+  </div>
 
-    <section class="gallery" id="cake">
-      <h2>Our Cakes</h2>
-      <div class="thumbs">
-        <img src="https://via.placeholder.com/300x200?text=Chocolate+Cake" alt="Bánh Flan">
-        <img src="https://via.placeholder.com/300x200?text=Strawberry+Cake" alt="Bánh Flan">
-        <img src="https://via.placeholder.com/300x200?text=Cheesecake" alt="Bánh Hạnh Nhân">
+  <div class="hero-right">
+    <div class="hero-mosaic">
+      <div class="mosaic-img">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12s1.5 3 4 3 4-3 4-3"/><path d="M9 9h.01M15 9h.01"/></svg>
+          Bánh Kem Sinh Nhật
+        </div>
       </div>
-    </section>
+      <div class="mosaic-img">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+          Rau Câu
+        </div>
+      </div>
+      <div class="mosaic-img">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Kẹo Hạnh Phúc
+        </div>
+      </div>
+      <div class="mosaic-img">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Bánh Hạnh Nhân
+        </div>
+      </div>
+      <div class="mosaic-img" style="grid-column:span 2">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          Lạp Xưởng Nhà Làm
+        </div>
+      </div>
+    </div>
+    <div class="hero-badge">🎂 Đặt<br>bánh<br>theo yêu<br>cầu</div>
+  </div>
+  <div class="hero-blob"></div>
+</section>
 
+<!-- STRIP -->
+<div class="about-strip">
+  <div class="strip-item"><span class="strip-dot"></span>Bánh kem sinh nhật theo yêu cầu</div>
+  <div class="strip-item"><span class="strip-dot"></span>Rau câu nhiều màu sắc</div>
+  <div class="strip-item"><span class="strip-dot"></span>Bánh hạnh nhân thơm giòn</div>
+  <div class="strip-item"><span class="strip-dot"></span>Kẹo hạnh phúc handmade</div>
+  <div class="strip-item"><span class="strip-dot"></span>Lạp xưởng nhà làm nguyên chất</div>
+</div>
 
-    <section class="contact" id="lesson">
-      <h2>Visit Us</h2>
-      <p>819a Thuan An, Binh Minh, Vinh Long</p>
-      <p>Phone: 0977819988</p>
-    </section>
-  </main>
+<!-- PRODUCTS -->
+<section id="san-pham">
+  <div class="products-header">
+    <p class="section-label">Thực Đơn Của Thùy</p>
+    <h2 class="section-title">Những món ngon từ bếp nhà</h2>
+    <p class="section-sub">Tất cả sản phẩm đều được làm thủ công mỗi ngày, không chất bảo quản, đảm bảo hương vị tươi ngon nhất cho gia đình bạn.</p>
+  </div>
+  <div class="product-grid">
 
+    <div class="product-card">
+      <div class="product-img">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="40" height="40"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Ảnh Bánh Kem Sinh Nhật
+        </div>
+        <span class="product-tag">Bestseller</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Bánh Kem Sinh Nhật</h3>
+        <p class="product-desc">Bánh kem tươi được trang trí theo yêu cầu, phù hợp mọi lứa tuổi. Kem bơ mềm mịn, nhiều tầng, thiết kế độc đáo theo chủ đề.</p>
+      </div>
+    </div>
 
+    <div class="product-card">
+      <div class="product-img">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="40" height="40"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+          Ảnh Rau Câu
+        </div>
+        <span class="product-tag">Mới</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Rau Câu</h3>
+        <p class="product-desc">Rau câu phong thủy, rau câu 3D ho. Mát lạnh, trong veo, thích hợp làm quà tặng và tiệc.</p>
+      </div>
+    </div>
 
-  
+    <div class="product-card">
+      <div class="product-img">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="40" height="40"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Ảnh Bánh Hạnh Nhân
+        </div>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Bánh Hạnh Nhân</h3>
+        <p class="product-desc">Bánh hạnh nhân giòn tan, thơm béo với nhân hạnh nhân rang vàng. Đóng hộp quà sang trọng, phù hợp làm quà biếu.</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="40" height="40"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Ảnh Kẹo Hạnh Phúc
+        </div>
+        <span class="product-tag">Đặc Biệt</span>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Kẹo Hạnh Phúc</h3>
+        <p class="product-desc">Kẹo handmade với nhiều hương vị đặc biệt, được gói cẩn thận trong hộp quà xinh xắn. Món quà ý nghĩa cho mọi dịp.</p>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img">
+        <div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="40" height="40"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          Ảnh Lạp Xưởng
+        </div>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Lạp Xưởng Nhà Làm</h3>
+        <p class="product-desc">Lạp xưởng tươi làm tay từ thịt heo nguyên chất, không phẩm màu, không chất bảo quản. Hương vị đậm đà, thơm ngon.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="thu-vien">
+  <div class="gallery-header">
+    <p class="section-label">Thư Viện Ảnh</p>
+    <h2 class="section-title">Từng chiếc bánh, một tác phẩm</h2>
+    <p class="section-sub">Mỗi sản phẩm rời khỏi bếp đều mang theo tình yêu và sự tỉ mỉ của đôi bàn tay mẹ.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-img g1"><div class="ph" style="height:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Bánh kem dâu tây 2 tầng</div></div>
+    <div class="g-img g2"><div class="ph" style="height:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Rau câu 3D hoa hồng</div></div>
+    <div class="g-img g3"><div class="ph" style="height:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Bánh hạnh nhân hộp quà</div></div>
+    <div class="g-img g4"><div class="ph" style="height:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Kẹo hạnh phúc</div></div>
+    <div class="g-img g5"><div class="ph" style="height:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Lạp xưởng nhà làm</div></div>
+    <div class="g-img g6"><div class="ph" style="height:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Bánh kem chủ đề hoạt hình</div></div>
+    <div class="g-img g7"><div class="ph" style="height:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Rau câu dừa trái cây</div></div>
+    <div class="g-img g8"><div class="ph" style="height:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Tiệc sinh nhật đặc biệt</div></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="cau-chuyen">
+  <div class="story-imgs">
+    <div class="story-img"><div class="ph" style="height:100%">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Ảnh Mẹ Trong Bếp
+    </div></div>
+    <div class="story-img"><div class="ph" style="height:100%">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Nguyên Liệu Tươi
+    </div></div>
+    <div class="story-img"><div class="ph" style="height:100%">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="36" height="36"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Bánh Được Đóng Gói
+    </div></div>
+  </div>
+  <div class="story-text-side">
+    <span class="story-tag">Câu Chuyện Của Chúng Tôi</span>
+    <h2 class="section-title">Bếp nhỏ, tình yêu lớn</h2>
+    <p class="story-quote">"Mỗi chiếc bánh Thùy làm đều như gửi một lời yêu thương đến người nhận."</p>
+    <p class="story-text">
+      Bếp Mẹ Butt bắt đầu từ góc bếp nhỏ tại Thuận An, Bình Minh, Vĩnh Long — nơi mỗi buổi sáng thơm lừng mùi bơ và vani. Xuất phát từ tình yêu nấu nướng và muốn chia sẻ hương vị quê nhà, mẹ Butt đã gây dựng nên một thương hiệu bánh ngọt thủ công được nhiều gia đình tin yêu.
+    </p>
+    <p class="story-text">
+      Không sử dụng chất bảo quản, không phẩm màu nhân tạo — tất cả nguyên liệu đều được chọn lọc kỹ càng để đảm bảo an toàn và ngon miệng. Đặc biệt lạp xưởng nhà làm của mẹ là món quà mà khách hàng thường mua về cho cả gia đình.
+    </p>
+    <a href="https://www.facebook.com/cam.thuy.le.971565" target="_blank" class="btn-primary" style="display:inline-block; margin-top:1.5rem;">Theo Dõi Trên Facebook</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="danh-gia">
+  <p class="section-label">Khách Hàng Nói Gì</p>
+  <h2 class="section-title">Hàng nghìn nụ cười hài lòng</h2>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Bánh kem sinh nhật của mẹ Butt siêu đẹp và ngon! Kem tươi mịn, không ngán, thiết kế y như yêu cầu. Sẽ đặt tiếp cho sinh nhật năm sau!</p>
+      <p class="reviewer">— Nguyễn Thị Lan, Vĩnh Long</p>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Rau câu 3D đẹp không thua gì ngoài tiệm, mà giá lại dễ chịu hơn nhiều. Mua làm quà ai cũng khen ngợi hết. Cảm ơn mẹ Butt!</p>
+      <p class="reviewer">— Trần Văn Hùng, Cần Thơ</p>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Lạp xưởng nhà làm thơm và ngon hơn mấy chỗ bán ngoài chợ nhiều. Mua về làm quà Tết cho cả gia đình, ai cũng mê.</p>
+      <p class="reviewer">— Phạm Thị Hoa, Bình Minh</p>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Kẹo hạnh phúc dùng làm quà cưới cho khách mời, mọi người đều khen xinh và ngon. Mẹ Butt làm việc rất nhiệt tình và chuyên nghiệp!</p>
+      <p class="reviewer">— Lê Thị Mai, Vĩnh Long</p>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Bánh hạnh nhân giòn tan, thơm béo, không quá ngọt. Mua hộp quà biếu sếp dịp lễ, sếp khen nức nở. Nhất định sẽ quay lại!</p>
+      <p class="reviewer">— Võ Minh Tuấn, Cần Thơ</p>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">Đặt bánh kem cho sinh nhật con, mẹ Butt tư vấn thiết kế rất tận tâm. Kết quả vượt kỳ vọng, con bé thích lắm!</p>
+      <p class="reviewer">— Nguyễn Thu Hiền, Long Xuyên</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="lien-he">
+  <div class="contact-info">
+    <p class="section-label">Liên Hệ & Đặt Hàng</p>
+    <h2 class="section-title">Chúng tôi luôn sẵn sàng phục vụ bạn</h2>
+
+    <div class="contact-row">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+      </div>
+      <div>
+        <p class="contact-label">Địa Chỉ</p>
+        <p class="contact-value">819a Thuận An, Bình Minh, Vĩnh Long</p>
+      </div>
+    </div>
+
+    <div class="contact-row">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      </div>
+      <div>
+        <p class="contact-label">Điện Thoại</p>
+        <p class="contact-value">
+          <a href="tel:+840977819988" id="call-link">0977 819 988</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="contact-row">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </div>
+      <div>
+        <p class="contact-label">Tin Nhắn Trực Tiếp</p>
+        <p class="contact-value"><a href="https://www.facebook.com/messages/t/100029958670315" target="_blank">Nhắn tin ngay cho mẹ Butt →</a></p>
+      </div>
+    </div>
+
+    <div class="social-btns">
+      <a href="tel:+840977819988" class="social-btn btn-call" id="btn-call-main">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        Gọi Ngay
+      </a>
+      <a href="https://www.facebook.com/cam.thuy.le.971565" target="_blank" class="social-btn btn-fb">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        Trang Facebook
+      </a>
+      <a href="https://www.facebook.com/messages/t/100029958670315" target="_blank" class="social-btn btn-msg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Nhắn Tin Đặt Hàng
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-map">
+    <div class="map-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+      <strong>819a Thuận An</strong>
+      Bình Minh, Vĩnh Long
+      <br>
+      <a href="https://maps.app.goo.gl/HTHNeqgXyjkHbx8s7" target="_blank" style="color:var(--dusty); font-size:.8rem; margin-top:.5rem;">Xem trên Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Bếp Mẹ Butt</p>
+  <a href="https://maps.app.goo.gl/HTHNeqgXyjkHbx8s7" target="_blank">819a Thuận An, Bình Minh, Vĩnh Long</a>
+  <p class="footer-links">
+    <a href="tel:+840977819988">0977 819 988</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.facebook.com/cam.thuy.le.971565" target="_blank">Facebook</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.facebook.com/messages/t/100029958670315" target="_blank">Nhắn Tin Đặt Hàng</a>
+  </p>
+  <p class="footer-copy">© 2026 Bếp Mẹ Butt · Tất cả quyền được bảo lưu · Làm với ❤️ từ Cẩm Thùy</p>
+</footer>
+
+<!-- Floating call button -->
+<a href="tel:+840977819988" class="fab-call" id="fab-call" title="Gọi ngay 0977 819 988">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+</a>
+
+<script src="script.js"></script>
 </body>
 </html>
