@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đặt Hàng – Bếp Mẹ Butt</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FFF5F5;
+  --rose:  #F28B82;
+  --dusty: #C0392B;
+  --brown: #7B1A1A;
+  --gold:  #E53935;
+  --light: #FFEBEE;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: transparent;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--brown);
+}
+
+/* ── OVERLAY ── */
+.order-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(74, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+.order-overlay.open { display: flex; animation: fadeBg .25s ease; }
+@keyframes fadeBg { from { opacity:0 } to { opacity:1 } }
+
+/* ── MODAL ── */
+.order-modal {
+  background: var(--cream);
+  border-radius: 1.8rem;
+  width: 100%; max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 32px 80px rgba(74,0,0,.35);
+  animation: slideUp .32s cubic-bezier(.22,.68,0,1.2) both;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rose) transparent;
+}
+@keyframes slideUp {
+  from { opacity:0; transform: translateY(36px) scale(.97); }
+  to   { opacity:1; transform: translateY(0)   scale(1); }
+}
+
+/* ── MODAL HEADER ── */
+.modal-header {
+  background: linear-gradient(135deg, var(--brown) 0%, var(--dusty) 100%);
+  color: #fff;
+  padding: 2rem 2.4rem 1.6rem;
+  border-radius: 1.8rem 1.8rem 0 0;
+  position: relative;
+  overflow: hidden;
+}
+.modal-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.modal-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  position: relative;
+  margin-bottom: .35rem;
+}
+.modal-header h2 em { font-style: italic; opacity: .75; }
+.modal-header p { font-size: .82rem; opacity: .7; position: relative; }
+
+.close-btn {
+  position: absolute; top: 1.2rem; right: 1.4rem;
+  width: 2.2rem; height: 2.2rem; border-radius: 50%;
+  background: rgba(255,255,255,.18); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.1rem; transition: background .2s, transform .2s;
+  z-index: 2;
+}
+.close-btn:hover { background: rgba(255,255,255,.32); transform: scale(1.1); }
+
+/* ── SECTIONS ── */
+.modal-body { padding: 2rem 2.4rem; display: flex; flex-direction: column; gap: 2rem; }
+
+.form-section {
+  background: rgba(255,235,235,0.5);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 1.2rem;
+  padding: 1.6rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(192,57,43,.06), inset 0 1px 0 rgba(255,255,255,.8);
+}
+.section-head {
+  display: flex; align-items: center; gap: .7rem;
+  margin-bottom: 1.2rem;
+}
+.section-num {
+  width: 1.8rem; height: 1.8rem; border-radius: 50%;
+  background: var(--gold); color: #fff;
+  font-size: .75rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.section-head h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; color: var(--brown);
+}
+
+/* ── PRODUCT ITEMS ── */
+.product-item { margin-bottom: .75rem; }
+.product-check-row {
+  display: flex; align-items: center; gap: .7rem;
+  cursor: pointer; padding: .7rem .9rem;
+  border-radius: .75rem;
+  transition: background .2s;
+}
+.product-check-row:hover { background: rgba(192,57,43,.07); }
+
+.product-check-row input[type="checkbox"] {
+  width: 1.1rem; height: 1.1rem; cursor: pointer;
+  accent-color: var(--dusty);
+  flex-shrink: 0;
+}
+.product-label { flex: 1; }
+.product-name-text { font-size: .93rem; font-weight: 500; }
+.product-price { font-size: .78rem; color: var(--dusty); font-weight: 600; margin-left: .3rem; }
+
+.product-detail {
+  display: none; padding: .5rem .9rem 0 3rem; 
+  animation: expandIn .2s ease;
+}
+@keyframes expandIn { from { opacity:0; transform:translateY(-6px) } to { opacity:1; transform:translateY(0) } }
+.product-detail.open { display: block; }
+
+.qty-row { display: flex; align-items: center; gap: .8rem; margin-bottom: .6rem; }
+.qty-label { font-size: .78rem; opacity: .7; white-space: nowrap; }
+.qty-control { display: flex; align-items: center; gap: .5rem; }
+.qty-btn {
+  width: 1.8rem; height: 1.8rem; border-radius: 50%;
+  background: var(--dusty); color: #fff; border: none; cursor: pointer;
+  font-size: 1rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .15s;
+}
+.qty-btn:hover { background: var(--brown); transform: scale(1.08); }
+.qty-input {
+  width: 3rem; text-align: center;
+  border: 1.5px solid rgba(192,57,43,.3); border-radius: .5rem;
+  padding: .3rem; font-size: .9rem; font-family: inherit; color: var(--brown);
+  background: rgba(255,255,255,.7);
+}
+.qty-input:focus { outline: none; border-color: var(--dusty); }
+
+.note-input, .text-input, .addr-input {
+  width: 100%; border: 1.5px solid rgba(192,57,43,.25);
+  border-radius: .7rem; padding: .55rem .85rem;
+  font-size: .85rem; font-family: inherit; color: var(--brown);
+  background: rgba(255,255,255,.7); resize: none;
+  transition: border-color .2s;
+}
+.note-input:focus, .text-input:focus, .addr-input:focus {
+  outline: none; border-color: var(--dusty);
+  background: rgba(255,255,255,.95);
+}
+.note-label { font-size: .75rem; opacity: .65; margin-bottom: .3rem; display: block; }
+
+/* ── FORM FIELDS ── */
+.field-group { margin-bottom: 1rem; }
+.field-label {
+  display: block; font-size: .78rem; font-weight: 600;
+  letter-spacing: .05em; text-transform: uppercase;
+  opacity: .6; margin-bottom: .4rem;
+}
+
+/* ── PICKUP / DELIVERY ── */
+.pickup-options { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.pickup-option {
+  border: 1.5px solid rgba(192,57,43,.25);
+  border-radius: .9rem; padding: .9rem 1rem;
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: flex-start; gap: .7rem;
+  background: rgba(255,255,255,.5);
+}
+.pickup-option:hover { border-color: var(--rose); background: rgba(255,200,200,.2); }
+.pickup-option.selected { border-color: var(--dusty); background: rgba(192,57,43,.08); }
+.pickup-option input[type="radio"] { accent-color: var(--dusty); margin-top: .2rem; flex-shrink:0; }
+.pickup-opt-label { font-size: .88rem; font-weight: 500; }
+.pickup-opt-sub { font-size: .73rem; opacity: .6; margin-top: .1rem; }
+
+.extra-field {
+  display: none; margin-top: .8rem;
+  animation: expandIn .2s ease;
+}
+.extra-field.open { display: block; }
+
+.schedule-row { display: flex; gap: .7rem; }
+.schedule-row .text-input { flex: 1; }
+
+/* ── PAYMENT ── */
+.payment-options { display: flex; flex-direction: column; gap: .7rem; }
+.pay-option {
+  border: 1.5px solid rgba(192,57,43,.2);
+  border-radius: .9rem; padding: .9rem 1.1rem;
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; gap: .8rem;
+  background: rgba(255,255,255,.5);
+}
+.pay-option:hover { border-color: var(--rose); background: rgba(255,200,200,.15); }
+.pay-option.selected { border-color: var(--dusty); background: rgba(192,57,43,.07); }
+.pay-option input[type="radio"] { accent-color: var(--dusty); flex-shrink: 0; }
+.pay-icon { font-size: 1.3rem; }
+.pay-text { font-size: .88rem; font-weight: 500; }
+
+/* ── BILL ── */
+.bill-box {
+  background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,240,240,.9));
+  border: 1.5px solid rgba(192,57,43,.2);
+  border-radius: .9rem; padding: 1.1rem 1.3rem;
+  margin-bottom: 1rem;
+}
+.bill-empty { font-size: .85rem; opacity: .5; font-style: italic; text-align: center; padding: .5rem; }
+.bill-line {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .35rem 0; font-size: .88rem;
+  border-bottom: 1px dashed rgba(192,57,43,.12);
+}
+.bill-line:last-of-type { border-bottom: none; }
+.bill-total {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: .6rem; padding-top: .6rem;
+  border-top: 2px solid rgba(192,57,43,.2);
+  font-weight: 700; font-size: 1rem; color: var(--brown);
+}
+.bill-total-amt { color: var(--dusty); font-size: 1.15rem; }
+
+/* ── QR CODE ── */
+.qr-box {
+  display: none; text-align: center; padding: 1.2rem;
+  background: rgba(255,255,255,.8); border-radius: .9rem;
+  border: 1.5px solid rgba(192,57,43,.15);
+  animation: expandIn .25s ease;
+}
+.qr-box.open { display: block; }
+.qr-box img { width: 180px; height: 180px; border-radius: .75rem; margin: .7rem auto; display: block; }
+.qr-box p { font-size: .82rem; opacity: .7; }
+.qr-box strong { color: var(--dusty); font-size: .9rem; }
+.qr-placeholder {
+  width: 180px; height: 180px; margin: .7rem auto;
+  background: linear-gradient(135deg, #ffe0e0, #ffb3b3);
+  border-radius: .75rem; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .5rem;
+  font-size: .8rem; color: var(--brown); opacity: .7;
+}
+
+/* ── SUBMIT ── */
+.submit-btn {
+  width: 100%; padding: 1.1rem;
+  background: linear-gradient(135deg, var(--brown), var(--dusty));
+  color: #fff; border: none; border-radius: 3rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 1rem; font-weight: 600; cursor: pointer;
+  letter-spacing: .04em;
+  box-shadow: 0 8px 28px rgba(192,57,43,.35);
+  transition: transform .2s, box-shadow .2s, opacity .2s;
+}
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(192,57,43,.45); }
+.submit-btn:active { transform: translateY(0); }
+
+/* ── SUCCESS STATE ── */
+.success-view {
+  display: none; text-align: center; padding: 3rem 2rem;
+  animation: fadeUp .4s ease;
+}
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:translateY(0) } }
+.success-view.open { display: block; }
+.success-icon { font-size: 4rem; margin-bottom: 1rem; animation: pop .5s cubic-bezier(.34,1.56,.64,1); }
+@keyframes pop { from { transform:scale(0) } to { transform:scale(1) } }
+.success-view h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; color: var(--brown); margin-bottom: .8rem;
+}
+.success-view p { font-size: .9rem; opacity: .7; line-height: 1.8; margin-bottom: 1.5rem; }
+.success-close-btn {
+  background: var(--brown); color: #fff;
+  border: none; border-radius: 3rem; padding: .8rem 2rem;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: .9rem; font-weight: 600; cursor: pointer;
+  transition: background .2s;
+}
+.success-close-btn:hover { background: var(--dusty); }
+
+/* scrollbar */
+.order-modal::-webkit-scrollbar { width: 5px; }
+.order-modal::-webkit-scrollbar-track { background: transparent; }
+.order-modal::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 9999px; }
+
+@media (max-width: 500px) {
+  .modal-body { padding: 1.4rem 1.2rem; }
+  .modal-header { padding: 1.5rem 1.4rem 1.2rem; }
+  .pickup-options { grid-template-columns: 1fr; }
+  .schedule-row { flex-direction: column; gap: .5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     ORDER OVERLAY (paste into your page)
+═══════════════════════════════════ -->
+<div class="order-overlay" id="orderOverlay">
+  <div class="order-modal" id="orderModal">
+
+    <!-- HEADER -->
+    <div class="modal-header">
+      <button class="close-btn" id="closeBtn" aria-label="Đóng">✕</button>
+      <h2>Đặt Hàng Ngay <em>🎂</em></h2>
+      <p>Bếp Mẹ Butt · 819a Thuận An, Bình Minh, Vĩnh Long</p>
+    </div>
+
+    <!-- BODY -->
+    <div class="modal-body" id="orderForm">
+
+      <!-- SECTION 1 – PRODUCTS -->
+      <div class="form-section">
+        <div class="section-head">
+          <span class="section-num">1</span>
+          <h3>Chọn Món &amp; Số Lượng</h3>
+        </div>
+
+        <!-- Bánh Bò -->
+        <div class="product-item">
+          <label class="product-check-row">
+            <input type="checkbox" data-product="banh-bo" data-name="Bánh Bò Thốt Nốt" data-price="100000">
+            <span class="product-label">
+              <span class="product-name-text">Bánh Bò Thốt Nốt</span>
+              <span class="product-price">100.000₫/hộp</span>
+            </span>
+          </label>
+          <div class="product-detail" id="detail-banh-bo">
+            <div class="qty-row">
+              <span class="qty-label">Số lượng (hộp):</span>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('banh-bo',-1)">−</button>
+                <input type="number" class="qty-input" id="qty-banh-bo" value="1" min="1" onchange="updateBill()">
+                <button class="qty-btn" onclick="changeQty('banh-bo',1)">+</button>
+              </div>
+            </div>
+            <span class="note-label">Ghi chú thêm cho shop (cắt sẵn, giảm ngọt…):</span>
+            <textarea class="note-input" rows="2" placeholder="Ví dụ: cắt bánh sẵn, giảm độ ngọt..." id="note-banh-bo"></textarea>
+          </div>
+        </div>
+
+        <!-- Bánh Chuối -->
+        <div class="product-item">
+          <label class="product-check-row">
+            <input type="checkbox" data-product="banh-chuoi" data-name="Bánh Chuối" data-price="80000">
+            <span class="product-label">
+              <span class="product-name-text">Bánh Chuối</span>
+              <span class="product-price">80.000₫/hộp</span>
+            </span>
+          </label>
+          <div class="product-detail" id="detail-banh-chuoi">
+            <div class="qty-row">
+              <span class="qty-label">Số lượng (hộp):</span>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('banh-chuoi',-1)">−</button>
+                <input type="number" class="qty-input" id="qty-banh-chuoi" value="1" min="1" onchange="updateBill()">
+                <button class="qty-btn" onclick="changeQty('banh-chuoi',1)">+</button>
+              </div>
+            </div>
+            <span class="note-label">Ghi chú thêm cho shop:</span>
+            <textarea class="note-input" rows="2" placeholder="Ví dụ: ít đường, thêm dừa..." id="note-banh-chuoi"></textarea>
+          </div>
+        </div>
+
+        <!-- Bánh Flan -->
+        <div class="product-item">
+          <label class="product-check-row">
+            <input type="checkbox" data-product="banh-flan" data-name="Bánh Flan" data-price="90000">
+            <span class="product-label">
+              <span class="product-name-text">Bánh Flan</span>
+              <span class="product-price">90.000₫/hộp</span>
+            </span>
+          </label>
+          <div class="product-detail" id="detail-banh-flan">
+            <div class="qty-row">
+              <span class="qty-label">Số lượng (hộp):</span>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('banh-flan',-1)">−</button>
+                <input type="number" class="qty-input" id="qty-banh-flan" value="1" min="1" onchange="updateBill()">
+                <button class="qty-btn" onclick="changeQty('banh-flan',1)">+</button>
+              </div>
+            </div>
+            <span class="note-label">Ghi chú thêm cho shop:</span>
+            <textarea class="note-input" rows="2" placeholder="Ví dụ: thêm caramel, không đá..." id="note-banh-flan"></textarea>
+          </div>
+        </div>
+
+        <!-- Khô Gà -->
+        <div class="product-item">
+          <label class="product-check-row">
+            <input type="checkbox" data-product="kho-ga" data-name="Khô Gà" data-price="120000">
+            <span class="product-label">
+              <span class="product-name-text">Khô Gà</span>
+              <span class="product-price">120.000₫/gói</span>
+            </span>
+          </label>
+          <div class="product-detail" id="detail-kho-ga">
+            <div class="qty-row">
+              <span class="qty-label">Số lượng (gói):</span>
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('kho-ga',-1)">−</button>
+                <input type="number" class="qty-input" id="qty-kho-ga" value="1" min="1" onchange="updateBill()">
+                <button class="qty-btn" onclick="changeQty('kho-ga',1)">+</button>
+              </div>
+            </div>
+            <span class="note-label">Ghi chú thêm cho shop:</span>
+            <textarea class="note-input" rows="2" placeholder="Ví dụ: ít cay, thêm sả..." id="note-kho-ga"></textarea>
+          </div>
+        </div>
+
+      </div><!-- /section 1 -->
+
+      <!-- SECTION 2 – DELIVERY INFO -->
+      <div class="form-section">
+        <div class="section-head">
+          <span class="section-num">2</span>
+          <h3>Thông Tin Nhận Hàng</h3>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="customerName">Họ và tên người đặt</label>
+          <input type="text" class="text-input" id="customerName" placeholder="Nguyễn Văn A…">
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="customerPhone">Số điện thoại</label>
+          <input type="tel" class="text-input" id="customerPhone" placeholder="09xx xxx xxx">
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" style="margin-bottom:.7rem;">Hình thức nhận hàng</label>
+          <div class="pickup-options">
+            <label class="pickup-option" id="opt-pickup">
+              <input type="radio" name="delivery" value="pickup" checked>
+              <div>
+                <div class="pickup-opt-label">🏠 Nhận tại bếp</div>
+                <div class="pickup-opt-sub">819a Thuận An, Bình Minh, Vĩnh Long</div>
+              </div>
+            </label>
+            <label class="pickup-option" id="opt-delivery">
+              <input type="radio" name="delivery" value="delivery">
+              <div>
+                <div class="pickup-opt-label">🛵 Giao tận nhà</div>
+                <div class="pickup-opt-sub">Nhập địa chỉ bên dưới</div>
+              </div>
+            </label>
+          </div>
+
+          <!-- Pickup extra: schedule -->
+          <div class="extra-field open" id="extra-pickup">
+            <span class="note-label" style="margin-top:.7rem; display:block;">
+              📅 Hẹn giờ lấy hàng <em>(ít nhất 1–2 ngày sau khi đặt)</em>
+            </span>
+            <div class="schedule-row">
+              <input type="text" class="text-input" id="pickupDate" placeholder="Ngày lấy (vd: 25/06)">
+              <input type="text" class="text-input" id="pickupTime" placeholder="Buổi (sáng / chiều / tối)">
+            </div>
+          </div>
+
+          <!-- Delivery extra: address -->
+          <div class="extra-field" id="extra-delivery">
+            <span class="note-label" style="margin-top:.7rem; display:block;">📍 Địa chỉ người nhận</span>
+            <input type="text" class="addr-input" id="deliveryAddr" placeholder="Số nhà, đường, phường/xã, quận/huyện…">
+          </div>
+        </div>
+
+      </div><!-- /section 2 -->
+
+      <!-- SECTION 3 – PAYMENT -->
+      <div class="form-section">
+        <div class="section-head">
+          <span class="section-num">3</span>
+          <h3>Thanh Toán</h3>
+        </div>
+
+        <!-- Bill -->
+        <div class="bill-box" id="billBox">
+          <p class="bill-empty" id="billEmpty">Chưa chọn món nào — hãy chọn ở bên trên 🛒</p>
+          <div id="billLines"></div>
+          <div class="bill-total" id="billTotal" style="display:none;">
+            <span>Tổng cộng</span>
+            <span class="bill-total-amt" id="billTotalAmt">0₫</span>
+          </div>
+        </div>
+
+        <!-- Payment method -->
+        <div class="payment-options">
+          <label class="pay-option selected" id="pay-cash">
+            <input type="radio" name="payment" value="cash" checked>
+            <span class="pay-icon">💵</span>
+            <span class="pay-text">Tiền mặt (nhận khi lấy hàng)</span>
+          </label>
+          <label class="pay-option" id="pay-transfer">
+            <input type="radio" name="payment" value="transfer">
+            <span class="pay-icon">📲</span>
+            <span class="pay-text">Chuyển khoản</span>
+          </label>
+        </div>
+
+        <!-- QR Code (shown when transfer selected) -->
+        <div class="qr-box" id="qrBox">
+          <strong>Quét mã để chuyển khoản</strong>
+          <!-- Replace the src below with the actual QR code image path, e.g. "QRCode.png" -->
+          <div class="qr-placeholder" id="qrPlaceholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h2v2h-2zM18 14h3v2h-3zM14 18h1v3h-1zM17 17h4v4h-4z"/></svg>
+            <span>QR Code thanh toán<br><small>(thay bằng ảnh QR thật)</small></span>
+          </div>
+          <!-- Uncomment and set src when you have the QR image: -->
+          <!-- <img src="QRCode.png" alt="QR chuyển khoản Bếp Mẹ Butt"> -->
+          <p>Ngân hàng: <strong>Vietcombank</strong></p>
+          <p>STK: <strong>1234567890</strong> · Tên: <strong>BEP ME BUTT</strong></p>
+          <p style="margin-top:.4rem; font-size:.75rem; opacity:.6;">Nội dung CK: <em>Tên + SĐT + Đặt hàng</em></p>
+        </div>
+
+      </div><!-- /section 3 -->
+
+      <!-- SUBMIT -->
+      <button class="submit-btn" id="submitBtn" onclick="submitOrder()">
+        🎀 Xác Nhận Đặt Hàng
+      </button>
+
+    </div><!-- /orderForm -->
+
+    <!-- SUCCESS VIEW -->
+    <div class="success-view" id="successView">
+      <div class="success-icon">🎉</div>
+      <h3>Đặt hàng thành công!</h3>
+      <p>
+        Cảm ơn bạn đã tin tưởng Bếp Mẹ Butt 💕<br>
+        Mẹ Butt sẽ liên hệ lại trong thời gian sớm nhất để xác nhận đơn hàng.<br><br>
+        <strong>Liên hệ ngay:</strong> <a href="tel:+840977819988" style="color:var(--dusty);">0977 819 988</a>
+      </p>
+      <button class="success-close-btn" onclick="closeOverlay()">Đóng</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     DEMO TRIGGER BUTTON (remove in production)
+═══════════════════════════ -->
+<style>
+  body { display:flex; align-items:center; justify-content:center; min-height:100vh; background:#FFF5F5; }
+  .demo-btn {
+    background: #7B1A1A; color:#fff;
+    border:none; border-radius:3rem; padding:1rem 2.5rem;
+    font-family:'Be Vietnam Pro',sans-serif; font-size:1rem; font-weight:600;
+    cursor:pointer; box-shadow:0 8px 24px rgba(123,26,26,.3); transition:transform .2s;
+  }
+  .demo-btn:hover { transform:translateY(-2px); }
+</style>
+<button class="demo-btn" onclick="openOrderForm()">🎂 Đặt Hàng Ngay (Demo)</button>
+
+<script>
+/* ── OPEN / CLOSE ── */
+function openOrderForm() {
+  document.getElementById('orderOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeOverlay() {
+  document.getElementById('orderOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  // reset success view if shown
+  document.getElementById('successView').classList.remove('open');
+  document.getElementById('orderForm').style.display = '';
+}
+document.getElementById('closeBtn').addEventListener('click', closeOverlay);
+document.getElementById('orderOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeOverlay();
+});
+
+/* ── PRODUCT CHECKBOXES ── */
+document.querySelectorAll('.product-check-row input[type="checkbox"]').forEach(cb => {
+  cb.addEventListener('change', function() {
+    const id = this.dataset.product;
+    const detail = document.getElementById('detail-' + id);
+    detail.classList.toggle('open', this.checked);
+    updateBill();
+  });
+});
+
+/* ── QTY CONTROLS ── */
+function changeQty(product, delta) {
+  const input = document.getElementById('qty-' + product);
+  let val = parseInt(input.value) || 1;
+  val = Math.max(1, val + delta);
+  input.value = val;
+  updateBill();
+}
+
+/* ── BILL UPDATE ── */
+function updateBill() {
+  const checked = document.querySelectorAll('.product-check-row input[type="checkbox"]:checked');
+  const lines = document.getElementById('billLines');
+  const empty = document.getElementById('billEmpty');
+  const total = document.getElementById('billTotal');
+  const totalAmt = document.getElementById('billTotalAmt');
+
+  lines.innerHTML = '';
+  let sum = 0;
+
+  checked.forEach(cb => {
+    const id = cb.dataset.product;
+    const name = cb.dataset.name;
+    const price = parseInt(cb.dataset.price);
+    const qty = parseInt(document.getElementById('qty-' + id).value) || 1;
+    const subtotal = price * qty;
+    sum += subtotal;
+
+    lines.innerHTML += `
+      <div class="bill-line">
+        <span>${name} × ${qty}</span>
+        <span>${subtotal.toLocaleString('vi-VN')}₫</span>
+      </div>`;
+  });
+
+  if (checked.length === 0) {
+    empty.style.display = '';
+    total.style.display = 'none';
+  } else {
+    empty.style.display = 'none';
+    total.style.display = 'flex';
+    totalAmt.textContent = sum.toLocaleString('vi-VN') + '₫';
+  }
+}
+
+/* ── DELIVERY TOGGLE ── */
+document.querySelectorAll('input[name="delivery"]').forEach(r => {
+  r.addEventListener('change', function() {
+    const isPickup = this.value === 'pickup';
+    document.getElementById('extra-pickup').classList.toggle('open', isPickup);
+    document.getElementById('extra-delivery').classList.toggle('open', !isPickup);
+    document.getElementById('opt-pickup').classList.toggle('selected', isPickup);
+    document.getElementById('opt-delivery').classList.toggle('selected', !isPickup);
+  });
+});
+// init
+document.getElementById('opt-pickup').classList.add('selected');
+
+/* ── PAYMENT TOGGLE ── */
+document.querySelectorAll('input[name="payment"]').forEach(r => {
+  r.addEventListener('change', function() {
+    const isTransfer = this.value === 'transfer';
+    document.getElementById('qrBox').classList.toggle('open', isTransfer);
+    document.getElementById('pay-cash').classList.toggle('selected', !isTransfer);
+    document.getElementById('pay-transfer').classList.toggle('selected', isTransfer);
+  });
+});
+
+/* ── SUBMIT ── */
+function submitOrder() {
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const checked = document.querySelectorAll('.product-check-row input[type="checkbox"]:checked');
+
+  if (checked.length === 0) {
+    alert('Vui lòng chọn ít nhất một món! 🛒');
+    return;
+  }
+  if (!name) {
+    alert('Vui lòng nhập họ và tên người đặt!');
+    document.getElementById('customerName').focus();
+    return;
+  }
+  if (!phone) {
+    alert('Vui lòng nhập số điện thoại!');
+    document.getElementById('customerPhone').focus();
+    return;
+  }
+
+  // Show success
+  document.getElementById('orderForm').style.display = 'none';
+  document.getElementById('successView').classList.add('open');
+  document.getElementById('orderModal').scrollTop = 0;
+}
+
+/* ── EXPOSE openOrderForm GLOBALLY for index.html ── */
+window.openOrderForm = openOrderForm;
+</script>
+
+</body>
+</html>
